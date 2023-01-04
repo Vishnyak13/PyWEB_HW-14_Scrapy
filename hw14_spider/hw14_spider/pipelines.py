@@ -40,11 +40,13 @@ class Hw14SpiderPipeline:
                 born_date = soup.find('span', class_='author-born-date').get_text(strip=True)
                 born_location = soup.find('span', class_='author-born-location').get_text(strip=True)
                 name = item['author'][0]
+                author_bio = soup.find('div', class_='author-description').get_text(strip=True)
                 author = Authors(
                     author_name=f'{name}',
                     born_date=f'{born_date}',
                     born_location=f'{born_location[3:]}',
                     author_url=f'{author_full_url}',
+                    author_bio=f'{author_bio}'
                 )
                 session.add(author)
                 session.commit()
