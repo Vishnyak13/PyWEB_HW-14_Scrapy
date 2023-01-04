@@ -8,8 +8,8 @@ Base = declarative_base()
 many_to_many = Table(
     'many_to_many',
     Base.metadata,
-    Column('tag_id', Integer, ForeignKey('tags.id')),
-    Column('quote_id', Integer, ForeignKey('quotes.id')),
+    Column('tags_id', Integer, ForeignKey('tags.id')),
+    Column('quotes_id', Integer, ForeignKey('quotes.id')),
 )
 
 
@@ -36,5 +36,5 @@ class Quotes(Base):
     tags = relationship('Tags', secondary=many_to_many, backref='tags')
 
 
-engine = create_engine('sqlite:///quotes.db', connect_args={'check_same_thread': False})
+engine = create_engine('sqlite:///quotes.db.sqlite3', connect_args={'check_same_thread': False})
 Base.metadata.create_all(engine)
