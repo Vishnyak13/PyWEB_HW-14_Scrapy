@@ -32,8 +32,8 @@ class Hw14SpiderPipeline:
             if flag == 0:
                 author_url = item['author_url']
                 author_full_url = URL + author_url[7:-1] + '/'
-                print(author_full_url)
-                print('-----------------')
+                # print(author_full_url)
+                # print('-----------------')
 
                 response = requests.get(author_full_url)
                 soup = BeautifulSoup(response.text, 'lxml')
