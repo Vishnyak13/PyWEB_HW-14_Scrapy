@@ -1,3 +1,5 @@
+import re
+
 import scrapy
 
 
@@ -7,4 +9,15 @@ class AuthorsSpider(scrapy.Spider):
     start_urls = ['http://quotes.toscrape.com/']
 
     def parse(self, response):
-        pass
+        for quote in response.xpath("/html//div[@class='quote']"):
+            yield {
+                'tags': quote.xpath("div[@class='tags']/a/text()").extract(),
+                'author_url': re.search(r'href="(.+)"',
+                                        quote.xpath("span/a").get()).group(),
+                'author': quote.xpath("span/small/text()").extract(),
+                'quote': quote.xpath("span[@class='text']/text()").get()
+            }
+
+        next_link = response.xpath("//li[@class='next']/a/@href").get()
+        if next_link:
+            yield scrapy.Request(url=self.start_urls[0] + next_link)
