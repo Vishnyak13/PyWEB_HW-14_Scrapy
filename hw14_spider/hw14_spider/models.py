@@ -20,6 +20,7 @@ class Authors(Base):
     born_date = Column(String(60), nullable=True)
     born_location = Column(String(60), nullable=True)
     author_url = Column(String(100), nullable=True)
+    author_bio = Column(String(), nullable=True)
 
 
 class Tags(Base):
