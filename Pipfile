@@ -6,6 +6,7 @@ name = "pypi"
 [packages]
 scrapy = "*"
 sqlalchemy = "*"
+beautifulsoup4 = "*"
 
 [dev-packages]
 
